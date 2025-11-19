@@ -1,6 +1,6 @@
 // CONFIGURAÇÃO – tu vai pegar no Supabase depois
-const SUPABASE_URL = "COLOCA_AQUI";
-const SUPABASE_ANON = "COLOCA_AQUI";
+const SUPABASE_URL = "https://imivvngmmpzfdylhvlog.supabase.co";
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltaXZ2bmdtbXB6ZmR5bGh2bG9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1NzIwMzQsImV4cCI6MjA3OTE0ODAzNH0.eDNKT7D0iW7-mTlhA181swP9lPfzcph2_W6Ek-_Zr_k";
 
 const supabase = supabaseJs.createClient(SUPABASE_URL, SUPABASE_ANON);
 
