@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADM - Estoque Paradox</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <h1>Painel ADM - Paradox</h1>
+
+    <h2>Adicionar Item</h2>
+    <input id="nome" placeholder="Nome do item" style="margin: 5px;"><br>
+    <input id="qtd" type="number" placeholder="Quantidade" style="margin: 5px;"><br>
+    <button onclick="addItem()">Adicionar ao estoque</button>
+
+    <h2>Estoque Atual</h2>
+    <div id="estoqueLista"></div>
+
+    <script>
+        function carregarEstoque() {
+            let estoque = JSON.parse(localStorage.getItem("estoqueParadox")) || [];
+            let div = document.getElementById("estoqueLista");
+            
+            if (estoque.length === 0) {
+                div.innerHTML = "<p>Nenhum item no estoque.</p>";
+                return;
+            }
+
+            let html = "<ul>";
+            estoque.forEach((item, i) => {
+                html += `
+                    <li>
+                        <strong>${item.nome}</strong> — ${item.qtd}
+                        <button onclick="removerItem(${i})">Remover</button>
+                    </li>
+                `;
+            });
+            html += "</ul>";
+
+            div.innerHTML = html;
+        }
+
+        function addItem() {
+            let nome = document.getElementById("nome").value;
+            let qtd = Number(document.getElementById("qtd").value);
+
+            if (!nome || qtd <= 0) {
+                alert("Preencha tudo certinho.");
+                return;
+            }
+
+            let estoque = JSON.parse(localStorage.getItem("estoqueParadox")) || [];
+
+            estoque.push({ nome, qtd });
+
+            localStorage.setItem("estoqueParadox", JSON.stringify(estoque));
+
+            carregarEstoque();
+            alert("Item adicionado!");
+        }
+
+        function removerItem(i) {
+            let estoque = JSON.parse(localStorage.getItem("estoqueParadox")) || [];
+            estoque.splice(i, 1);
+            localStorage.setItem("estoqueParadox", JSON.stringify(estoque));
+            carregarEstoque();
+        }
+
+        carregarEstoque();
+    </script>
+
+</body>
+</html>
