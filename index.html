@@ -15,10 +15,14 @@
 
 <main>
 
-    <section id="estoque">
-        <h2>📦 Estoque</h2>
-        <div id="lista-itens"></div>
-    </section>
+    <section id="estoque-box" style="margin-bottom: 20px;">
+    <h2>📦 Estoque Atual do Clã</h2>
+
+    <div id="listaEstoque" style="padding: 10px; background: #222; border-radius: 10px;">
+        Carregando estoque...
+    </div>
+</section>
+
 
     <section id="pedido">
         <h2>📝 Solicitar Item</h2>
@@ -37,5 +41,32 @@
 </main>
 
 <script src="app.js"></script>
+    <script>
+    // ---------- CARREGAR ESTOQUE ----------
+    function carregarEstoque() {
+        let estoque = JSON.parse(localStorage.getItem("estoqueParadox")) || [];
+        let div = document.getElementById("listaEstoque");
+
+        if (estoque.length === 0) {
+            div.innerHTML = "<p>Nenhum item no estoque.</p>";
+            return;
+        }
+
+        let html = "<ul>";
+        estoque.forEach(item => {
+            html += `
+                <li style='margin: 5px 0;'>
+                    <strong>${item.nome}</strong> — Quantidade: ${item.qtd}
+                </li>
+            `;
+        });
+        html += "</ul>";
+
+        div.innerHTML = html;
+    }
+
+    carregarEstoque();
+</script>
+
 </body>
 </html>
