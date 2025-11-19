@@ -42,7 +42,25 @@
             div.innerHTML = html;
         }
 
-        function addItem() {
+function salvarHistorico(acao, item, qtd, user="ADM") {
+    let hist = JSON.parse(localStorage.getItem("historicoParadox")) || [];
+
+    let registro = {
+        acao,
+        item,
+        qtd,
+        user,
+        data: new Date().toLocaleString()
+    };
+
+    hist.push(registro);
+
+    localStorage.setItem("historicoParadox", JSON.stringify(hist));
+}
+
+function addItem() {
+            salvarHistorico("Adicionou item", nome, qtd, "ADM");
+
             let nome = document.getElementById("nome").value;
             let qtd = Number(document.getElementById("qtd").value);
 
@@ -62,11 +80,19 @@
         }
 
         function removerItem(i) {
-            let estoque = JSON.parse(localStorage.getItem("estoqueParadox")) || [];
-            estoque.splice(i, 1);
-            localStorage.setItem("estoqueParadox", JSON.stringify(estoque));
-            carregarEstoque();
-        }
+    let estoque = JSON.parse(localStorage.getItem("estoqueParadox")) || [];
+    
+    let removido = estoque[i]; // pegar item removido
+
+    estoque.splice(i, 1);
+
+    localStorage.setItem("estoqueParadox", JSON.stringify(estoque));
+
+    salvarHistorico("Removeu item", removido.nome, removido.qtd, "ADM");
+
+    carregarEstoque();
+}
+
 
         carregarEstoque();
     </script>
