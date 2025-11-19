@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico - Paradox</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>📜 Histórico de Movimentações</h1>
+
+<div id="listaHistorico" style="padding: 10px; background: #222; border-radius: 10px;">
+    Carregando histórico...
+</div>
+
+<script>
+    function carregarHistorico() {
+        let hist = JSON.parse(localStorage.getItem("historicoParadox")) || [];
+        let div = document.getElementById("listaHistorico");
+
+        if (hist.length === 0) {
+            div.innerHTML = "<p>Nenhum registro no histórico.</p>";
+            return;
+        }
+
+        let html = "<ul>";
+        hist.reverse().forEach(item => {
+            html += `
+                <li style="margin: 5px 0;">
+                    <strong>${item.acao}</strong> — ${item.item} (${item.qtd})
+                    <br>
+                    <small>${item.user} — ${item.data}</small>
+                </li>
+            `;
+        });
+        html += "</ul>";
+
+        div.innerHTML = html;
+    }
+
+    carregarHistorico();
+</script>
+
+</body>
+</html>
