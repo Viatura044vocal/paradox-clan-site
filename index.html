@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARADOX - Estoque da Base</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header>
+    <h1>PARADOX - Base</h1>
+</header>
+
+<main>
+
+    <section id="estoque">
+        <h2>📦 Estoque</h2>
+        <div id="lista-itens"></div>
+    </section>
+
+    <section id="pedido">
+        <h2>📝 Solicitar Item</h2>
+
+        <input id="nick" placeholder="Seu nick">
+        <input id="item" placeholder="Nome do item">
+        <input id="qtd" type="number" placeholder="Quantidade">
+
+        <textarea id="motivo" placeholder="Motivo"></textarea>
+
+        <button onclick="criarPedido()">Enviar pedido</button>
+
+        <p id="msg"></p>
+    </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
